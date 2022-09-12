@@ -1,8 +1,12 @@
 <?php
 
-class homeController {
+class homeController extends Controller {
     
     public function index(){
-        echo "Olá mundo";
+        $data = [
+            'name' => 'Adrian',
+            'page' =>  'Home'
+        ];
+        $this->loadView('home', $data);
     }
 }
