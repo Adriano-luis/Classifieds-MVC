@@ -1,6 +1,6 @@
 <?php
 
-class UserClass extends Model{
+class User extends Model{
 
     /**
      * return int
@@ -8,7 +8,7 @@ class UserClass extends Model{
     public function getTotal(){
         
 
-        $sql = $this->$db->query("SELECT COUNT(*) as c FROM users");
+        $sql = $this->db->query("SELECT COUNT(*) as c FROM users");
         $total = $sql->fetch(PDO::FETCH_ASSOC);
 
         return $total['c'];
@@ -25,12 +25,12 @@ class UserClass extends Model{
     public function cadastrar($name, $email, $password, $phone) {
         
         $sql = "SELECT id FROM users WHERE email = :email";
-        $sql = $this->$db->prepare($sql);
+        $sql = $this->db->prepare($sql);
         $sql->bindValue(':email', $email);
         $sql->execute();
 
         if($sql->rowCount() == 0 ){
-            $sql = $this->$db->prepare("INSERT INTO users SET name = :name, email = :email, password = :password, phone = :phone");
+            $sql = $this->db->prepare("INSERT INTO users SET name = :name, email = :email, password = :password, phone = :phone");
             $sql->bindValue(':name', $name);
             $sql->bindValue(':email', $email);
             $sql->bindValue(':password', $password);
@@ -51,7 +51,7 @@ class UserClass extends Model{
     public function login($email, $password){
         
 
-        $sql = $this->$db->prepare("SELECT * FROM users WHERE email = :email AND password = :password");
+        $sql = $this->db->prepare("SELECT * FROM users WHERE email = :email AND password = :password");
         $sql->bindValue(':email', $email);
         $sql->bindValue(':password', $password);
         $sql->execute();

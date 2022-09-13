@@ -1,10 +1,9 @@
 <?php
 
-class AdvertisementClass extends Model{
+class Advertisement extends Model{
 
     public function getAll($filters){
         
-
         $list = array();
 
         $queryFilters = array('1=1');
@@ -17,7 +16,7 @@ class AdvertisementClass extends Model{
         if(isset($filters['status']) && !empty($filters['status']))
             $queryFilters[] = 'status = :status';
 
-        $sql = $this->$db->prepare("SELECT *,
+        $sql = $this->db->prepare("SELECT *,
          (SELECT advertisements_images.url FROM advertisements_images
           WHERE advertisements_images.advertisement_id = advertisements.id limit 1 ) as url 
           FROM advertisements WHERE user_id = :user_id AND ".implode(' AND ', $queryFilters)."");
@@ -47,7 +46,7 @@ class AdvertisementClass extends Model{
     public function newAdvertisement($category, $title, $description, $price, $status){
         
         $sql = "INSERT INTO advertisements SET user_id = :user_id,  ";
-        $sql = $this->$db->prepare($sql);
+        $sql = $this->db->prepare($sql);
         $sql->bindValue(':user_id', $_SESSION['user_id']);
         $sql->bindValue(':category_id', $category);
         $sql->bindValue(':title', $title);
@@ -60,7 +59,7 @@ class AdvertisementClass extends Model{
 
     public function getAdvertisement($id){
         
-        $sql = $this->$db->prepare("SELECT *,
+        $sql = $this->db->prepare("SELECT *,
             (SELECT categories.name FROM categories
             WHERE categories.id = advertisements.category_id) as category,
             (SELECT users.phone FROM users
@@ -72,7 +71,7 @@ class AdvertisementClass extends Model{
         if($sql->rowCount() > 0){
             $item = $sql->fetch(PDO::FETCH_ASSOC);
 
-            $sql = $this->$db->prepare("SELECT id,url FROM advertisements_images WHERE advertisement_id = :id");
+            $sql = $this->db->prepare("SELECT id,url FROM advertisements_images WHERE advertisement_id = :id");
             $sql->bindValue(':id', $id);
             $sql->execute();
             if($sql->rowCount() > 0)
@@ -102,7 +101,7 @@ class AdvertisementClass extends Model{
         if(isset($filters['status']) && !empty($filters['status']))
             $queryFilters[] = 'advertisements.status = :status';
 
-        $sql = $this->$db->prepare("SELECT *,
+        $sql = $this->db->prepare("SELECT *,
          (SELECT advertisements_images.url FROM advertisements_images
             WHERE advertisements_images.advertisement_id = advertisements.id LIMIT 1) as url,
         (SELECT categories.name FROM categories
@@ -130,7 +129,7 @@ class AdvertisementClass extends Model{
 
     public function editAdvertisement($id, $category, $title, $description, $price, $status, $photos){
         
-        $sql = $this->$db->prepare("UPDATE advertisements SET category_id = :category_id, title = :title, description = :description, price = :price, status = :status WHERE id = :id");
+        $sql = $this->db->prepare("UPDATE advertisements SET category_id = :category_id, title = :title, description = :description, price = :price, status = :status WHERE id = :id");
         $sql->bindValue(':id', $id);
         $sql->bindValue(':category_id', $category);
         $sql->bindValue(':title', $title);
@@ -165,7 +164,7 @@ class AdvertisementClass extends Model{
                     imagecopyresampled($img, $ogirin, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
                     imagejpeg($img, 'assets/images/advertisements/'.$tmpName, 80);
 
-                    $sql = $this->$db->prepare("INSERT INTO advertisements_images SET advertisement_id = :id, url = :url");
+                    $sql = $this->db->prepare("INSERT INTO advertisements_images SET advertisement_id = :id, url = :url");
                     $sql->bindValue(':id', $id);
                     $sql->bindValue(':url', $tmpName);
                     $sql->execute();
@@ -176,11 +175,11 @@ class AdvertisementClass extends Model{
 
     public function delete($id){
         
-        $sql = $this->$db->prepare("DELETE FROM advertisements_images WHERE advertisement_id = :id");
+        $sql = $this->db->prepare("DELETE FROM advertisements_images WHERE advertisement_id = :id");
         $sql->bindValue(':id', $id);
         $sql->execute();
 
-        $sql = $this->$db->prepare("DELETE FROM advertisements WHERE id = :id");
+        $sql = $this->db->prepare("DELETE FROM advertisements WHERE id = :id");
         $sql->bindValue(':id', $id);
         $sql->execute();
     }
@@ -189,7 +188,7 @@ class AdvertisementClass extends Model{
         $newId = 0;
 
         
-        $sql = $this->$db->prepare("SELECT advertisement_id, url FROM advertisements_images WHERE id = :id");
+        $sql = $this->db->prepare("SELECT advertisement_id, url FROM advertisements_images WHERE id = :id");
         $sql->bindValue(':id', $id);
         $sql->execute();
         if ($sql->rowCount() > 0){
@@ -197,7 +196,7 @@ class AdvertisementClass extends Model{
             $newId = $data['advertisement_id'];
         }
 
-        $sql = $this->$db->prepare("DELETE FROM advertisements_images WHERE id = :id");
+        $sql = $this->db->prepare("DELETE FROM advertisements_images WHERE id = :id");
         $sql->bindValue(':id', $id);
         $sql->execute();
 
