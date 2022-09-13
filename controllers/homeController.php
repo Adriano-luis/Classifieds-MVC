@@ -7,6 +7,7 @@ class homeController extends Controller {
             'name' => 'Adrian',
             'page' =>  'Home'
         ];
-        $this->loadView('home', $data);
+
+        $this->loadTemplate('home', $data);
     }
 }

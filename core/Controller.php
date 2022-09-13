@@ -6,4 +6,13 @@ class Controller {
         extract($viewData);
         require 'views/'.$viewName.'.php';
     }
+
+    public function loadTemplate($viewName, $viewData = array()) {
+        require 'views/templates/template.php';
+    }
+
+    public function loadViewInTemplate($viewName, $viewData = array()) {
+        extract($viewData);
+        require 'views/'.$viewName.'.php';
+    }
 }
