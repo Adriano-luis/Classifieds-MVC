@@ -52,7 +52,7 @@
                                 <img src="<?= BASE_URL;?>assets/images/advertisements/<?= $img ?>" alt="" height="75">
                             </td>
                             <td>
-                               <a href="<?= BASE_URL;?>product/show/id=<?= $item['id']; ?>"><?= $item['title']; ?></a>
+                               <a href="<?= BASE_URL;?>advertisement/show/<?= $item['id']; ?>"><?= $item['title']; ?></a>
                             </td>
                             <td>
                                 <?= number_format($item['price'], 2); ?>

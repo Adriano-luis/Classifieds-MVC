@@ -1,30 +1,32 @@
 <?php
 
-class productController extends Controller {
+class advertisementController extends Controller {
 
     public function index(){
 
     }
 
     public function show($id){
-        if(!isset($_SESSION['user_id'])){
+        /*if(!isset($_SESSION['user_id'])){
             ?>
                 <script type="text/javascript">window.location.href="login.php"</script>
             <?php
             exit;
-        }
+        }*/
     
+        $data = array();
+
         $advertisements = new Advertisement();
         $user = new User();
     
         if(!empty($id)){
             $id = addslashes($id);
-            $info = $advertisements->getAdvertisement($id);
+            $data['info'] = $advertisements->getAdvertisement($id);
         }else{
-            ?>
-                <script type="text/javascript">window.location.href="index.php"</script>
-            <?php
+            header("Location:".BASE_URL);
             exit;
         }
+
+        $this->loadTemplate('advertisement', $data);
     }
 }
