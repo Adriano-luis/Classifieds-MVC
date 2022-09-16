@@ -10,8 +10,6 @@
     </div>
     <?php if(isset($success) && $success === true):?>
         <div class="alert alert-success alert-dismiss">Advertisement added!</div>
-    <?php elseif(isset($error) && $error === true):?>
-        <div class="alert alert-danger alert-dismiss">ERROR: Advertisement not added!</div>
     <?php endif;?>
     <form method="POST" enctype="multipart/form-data">
         <div class="form-group">

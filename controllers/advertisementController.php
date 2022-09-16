@@ -30,8 +30,7 @@ class advertisementController extends Controller {
     
             $a->newAdvertisement($category, $title, $description, $price, $status);
             $data['success'] = true;
-        }else
-            $data['error'] = true;
+        }
 
         $data['categories'] = $c->getAll();
         $this->loadTemplate('newAdvertisement', $data);
@@ -79,8 +78,7 @@ class advertisementController extends Controller {
 
             $a->editAdvertisement($id, $category, $title, $description, $price, $status, $photos);
             $data['success'] = true;
-        }else
-            $data['error'] = true;
+        }
 
         if(isset($id) && !empty($id)){
             $data = $a->getAdvertisement(addslashes($id));

@@ -8,6 +8,9 @@
             <a href="<?= BASE_URL;?>Advertisement"><div class="btn btn-default">See items</div></a>
         </div>
     </div>
+    <?php if(isset($success) && $success === true):?>
+        <div class="alert alert-success alert-dismiss">Advertisement added!</div>
+    <?php endif;?>
     <form method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="category">Category:</label>
