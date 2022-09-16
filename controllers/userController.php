@@ -35,7 +35,7 @@ class UserController extends Controller{
 
             if(!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password'])){
                 if($u->subscribe($name,$email,$password,$phone))
-                    $data['success'] = 'Congratulations! Please make login <a href="login.php">Click here to login</a>';
+                    $data['success'] = "Congratulations! Please make login <a href=' ".BASE_URL."user '>Click here to login</a>";
                 else
                     $data['error'] = 'Already exists an user related to this email address';
             }else
