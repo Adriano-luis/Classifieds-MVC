@@ -98,6 +98,7 @@ class advertisementController extends Controller {
         $a = new Advertisement();
         $id = $a->deletePhoto($idPhoto);
 
-        $this->edit($id);
+        header("Location:".BASE_URL.'advertisement/edit/'.$id);
+        exit;
     }
 }

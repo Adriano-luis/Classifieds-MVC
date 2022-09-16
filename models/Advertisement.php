@@ -151,7 +151,7 @@ class Advertisement extends Model{
         if(isset($photos)){
             for($qt=0; $qt<count($photos['name']); $qt++){
                 if(in_array($photos['type'][$qt], array('image/png', 'image/jpeg',))){
-                    $tmpName = md5(time().rand(0, 9000)).$photos['name'][$qt].'.png';
+                    $tmpName = md5(time().rand(0, 9000)).$photos['name'][$qt];
                     move_uploaded_file($photos['tmp_name'][$qt], 'assets/images/advertisements/'.$tmpName);
 
                     list($width_orig, $height_orig) = getimagesize('assets/images/advertisements/'.$tmpName);
