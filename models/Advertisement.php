@@ -2,7 +2,7 @@
 
 class Advertisement extends Model{
 
-    public function getAll($filters){
+    public function getAll($filters = null){
         
         $list = array();
 
@@ -16,11 +16,20 @@ class Advertisement extends Model{
         if(isset($filters['status']) && !empty($filters['status']))
             $queryFilters[] = 'status = :status';
 
-        $sql = $this->db->prepare("SELECT *,
-         (SELECT advertisements_images.url FROM advertisements_images
-          WHERE advertisements_images.advertisement_id = advertisements.id limit 1 ) as url 
-          FROM advertisements WHERE user_id = :user_id AND ".implode(' AND ', $queryFilters)."");
-        $sql->bindValue(':user_id', $_SESSION['user_id']);
+        if(isset($filters)){
+            $sql = $this->db->prepare("SELECT *,
+             (SELECT advertisements_images.url FROM advertisements_images
+              WHERE advertisements_images.advertisement_id = advertisements.id limit 1 ) as url 
+              FROM advertisements WHERE user_id = :user_id AND ".implode(' AND ', $queryFilters)."");
+            $sql->bindValue(':user_id', $_SESSION['user_id']);
+        }else{
+            $sql = $this->db->prepare("SELECT *,
+             (SELECT advertisements_images.url FROM advertisements_images
+              WHERE advertisements_images.advertisement_id = advertisements.id limit 1 ) as url 
+              FROM advertisements WHERE user_id = :user_id");
+            $sql->bindValue(':user_id', $_SESSION['user_id']);
+        }
+
 
         if(isset($filters['category'])  && !empty($filters['category']))
             $sql->bindValue(':category_id',$filters['category']);
@@ -45,7 +54,8 @@ class Advertisement extends Model{
 
     public function newAdvertisement($category, $title, $description, $price, $status){
         
-        $sql = "INSERT INTO advertisements SET user_id = :user_id,  ";
+        $sql = "INSERT INTO advertisements SET user_id = :user_id, category_id = :category_id, 
+                title = :title, description = :description, price = :price, status = :status";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':user_id', $_SESSION['user_id']);
         $sql->bindValue(':category_id', $category);

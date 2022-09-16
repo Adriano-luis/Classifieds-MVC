@@ -20,7 +20,7 @@
                             <a class="nav-link"><?= $_SESSION['user_name']; ?></a> 
                         </li>
                         <li class="nav-item">
-                            <a href="<?= BASE_URL;?>/product/myAdvertisements" class="nav-link">My items</a>
+                            <a href="<?= BASE_URL;?>advertisement" class="nav-link">My items</a>
                         </li>
                         <li class="nav-item">
                             <a href="<?= BASE_URL;?>user/logout" class="nav-link">Logout</a>
