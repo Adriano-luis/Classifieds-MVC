@@ -49,7 +49,6 @@ class User extends Model{
      * return boolean
      */
     public function login($email, $password){
-        
 
         $sql = $this->db->prepare("SELECT * FROM users WHERE email = :email AND password = :password");
         $sql->bindValue(':email', $email);
