@@ -184,6 +184,17 @@ class Advertisement extends Model{
     }
 
     public function delete($id){
+
+        $sql = $this->db->prepare("SELECT url FROM advertisements_images WHERE advertisement_id = :id");
+        $sql->bindValue(':id', $id);
+        $sql->execute();
+        if ($sql->rowCount() > 0){
+            $data = $sql->fetch(PDO::FETCH_ASSOC);
+            
+            foreach($data as $item){
+                unlink('assets/images/advertisements/'.$item);
+            }
+        }
         
         $sql = $this->db->prepare("DELETE FROM advertisements_images WHERE advertisement_id = :id");
         $sql->bindValue(':id', $id);

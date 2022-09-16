@@ -101,4 +101,18 @@ class advertisementController extends Controller {
         header("Location:".BASE_URL.'advertisement/edit/'.$id);
         exit;
     }
+
+    public function delete($id){
+        if(!isset($_SESSION['user_id'])){
+            header("Location:".BASE_URL.'login');
+            exit;
+        }
+
+        $advertisement = new Advertisement();
+        if(isset($id))
+            $advertisement->delete($id);
+        header("Location:".BASE_URL.'advertisement');
+        exit;
+
+    }
 }
