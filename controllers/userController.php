@@ -45,4 +45,11 @@ class UserController extends Controller{
 
         $this->loadTemplate('signUp', $data);
     }
+
+    public function logout(){
+        session_start();
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_name']);
+        header('Location:'.BASE_URL.'login');
+    }
 }
