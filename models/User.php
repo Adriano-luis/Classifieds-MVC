@@ -22,7 +22,7 @@ class User extends Model{
      * 
      * return boolean
      */
-    public function signUp($name, $email, $password, $phone) {
+    public function subscribe($name, $email, $password, $phone) {
         
         $sql = "SELECT id FROM users WHERE email = :email";
         $sql = $this->db->prepare($sql);

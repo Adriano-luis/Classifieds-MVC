@@ -20,7 +20,7 @@ class homeController extends Controller {
             $filters = $_GET['filter'];
         }
 
-        $totalAds = $advertisements->getAll($filters);
+        isset($_SESSION['user_id']) ? $totalAds = $advertisements->getAll($filters): $totalAds = array();
         $totalSub = $user->getTotal();
 
         $p = 1;

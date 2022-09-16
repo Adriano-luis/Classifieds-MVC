@@ -23,7 +23,7 @@ class UserController extends Controller{
         $this->loadTemplate('login', $data);
     }
 
-    public function signUp(){
+    public function subscribe(){
         $data = array();
         $u = new User();
 
@@ -34,7 +34,7 @@ class UserController extends Controller{
             $phone = addslashes($_POST['phone']);
 
             if(!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password'])){
-                if($u->signUp($name,$email,$password,$phone))
+                if($u->subscribe($name,$email,$password,$phone))
                     $data['success'] = 'Congratulations! Please make login <a href="login.php">Click here to login</a>';
                 else
                     $data['error'] = 'Already exists an user related to this email address';
@@ -50,6 +50,6 @@ class UserController extends Controller{
         session_start();
         unset($_SESSION['user_id']);
         unset($_SESSION['user_name']);
-        header('Location:'.BASE_URL.'login');
+        header('Location:'.BASE_URL.'user');
     }
 }

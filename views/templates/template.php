@@ -30,7 +30,7 @@
                             <a href="<?= BASE_URL;?>user/subscribe" class="nav-link">Sign Up</a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= BASE_URL;?>user/login" class="nav-link">Login</a>
+                            <a href="<?= BASE_URL;?>user" class="nav-link">Login</a>
                         </li>
                     <?php endif; ?>
                 </ul>

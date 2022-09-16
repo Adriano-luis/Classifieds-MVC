@@ -2,6 +2,13 @@
 
 class advertisementController extends Controller {
 
+    public function __construct() {
+        if(!isset($_SESSION['user_id'])){
+            header("Location:".BASE_URL.'user');
+            exit;
+        }
+    }
+
     public function index(){
         $data = array();
 
@@ -12,10 +19,6 @@ class advertisementController extends Controller {
     }
 
     public function new(){
-        if(!isset($_SESSION['user_id'])){
-            header("Location:".BASE_URL.'login');
-            exit;
-        }
     
         $data = array();
         $a = new Advertisement();
@@ -37,10 +40,6 @@ class advertisementController extends Controller {
     }
 
     public function show($id){
-        if(!isset($_SESSION['user_id'])){
-            header("Location:".BASE_URL.'login');
-            exit;
-        }
 
         $data = array();
         $advertisements = new Advertisement();
@@ -57,11 +56,7 @@ class advertisementController extends Controller {
         $this->loadTemplate('advertisement', $data);
     }
 
-    public function edit($id){
-        if(!isset($_SESSION['user_id'])){
-            header("Location:".BASE_URL.'login');
-            exit;
-        }
+    public function edit($id){  
 
         $a = new Advertisement();
         if(isset($_POST['title']) && isset($_POST['category'])){
@@ -101,10 +96,6 @@ class advertisementController extends Controller {
     }
 
     public function delete($id){
-        if(!isset($_SESSION['user_id'])){
-            header("Location:".BASE_URL.'login');
-            exit;
-        }
 
         $advertisement = new Advertisement();
         if(isset($id))

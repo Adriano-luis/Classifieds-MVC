@@ -1,12 +1,14 @@
-<div class="alert alert-danger">
-    <?php 
-        if(isset($error))
-            echo $error;
-            
-        if(isset($haveToFill))
-            echo $haveToFill;
-     ?>                         
-</div> 
+<?php if(isset($error) || isset($haveToFill)): ?>
+    <div class="alert alert-danger">
+        <?php 
+            if(isset($error))
+                echo $error;
+                
+            if(isset($haveToFill))
+                echo $haveToFill;
+        ?>                         
+    </div> 
+<?php endif; ?>
 <div class="container">
     <h1>Login</h1>
     <form method="POST">

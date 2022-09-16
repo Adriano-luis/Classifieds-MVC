@@ -1,18 +1,22 @@
-<div class="alert alert-danger">
-    <?php 
-        if(isset($error))
-            echo $error;
-            
-        if(isset($haveToFill))
-            echo $haveToFill;
-     ?>  
-</div> 
+<?php if(isset($error) || isset($haveToFill)): ?>
+    <div class="alert alert-danger">
+        <?php 
+            if(isset($error))
+                echo $error;
+                
+            if(isset($haveToFill))
+                echo $haveToFill;
+        ?>  
+    </div> 
+<?php endif; ?>
+<?php if(isset($success)): ?>
 <div class="alert alert-success">
-    <?php 
-        if(isset($success))
-            echo $success;
-     ?>        
-</div> 
+        <?php 
+            if(isset($success))
+                echo $success;
+        ?>   
+    </div> 
+<?php endif; ?>     
 <div class="container">
     <h1>Sign Up</h1>
     <form method="POST">
