@@ -42,8 +42,8 @@ class advertisementController extends Controller {
             header("Location:".BASE_URL.'login');
             exit;
         }
-        $data = array();
 
+        $data = array();
         $advertisements = new Advertisement();
         $user = new User();
     
@@ -56,5 +56,48 @@ class advertisementController extends Controller {
         }
 
         $this->loadTemplate('advertisement', $data);
+    }
+
+    public function edit($id){
+        if(!isset($_SESSION['user_id'])){
+            header("Location:".BASE_URL.'login');
+            exit;
+        }
+
+        $a = new Advertisement();
+        if(isset($_POST['title']) && isset($_POST['category'])){
+            $category = addslashes($_POST['category']);
+            $title = addslashes($_POST['title']);
+            $description = addslashes($_POST['description']);
+            $price = addslashes($_POST['price']);
+            $status = addslashes($_POST['status']);
+            $id = addslashes($id);
+            if(isset($_FILES['photos']))
+                $photos = $_FILES['photos'];
+            else
+                $photos = null;
+
+            $a->editAdvertisement($id, $category, $title, $description, $price, $status, $photos);
+            $data['success'] = true;
+        }else
+            $data['error'] = true;
+
+        if(isset($id) && !empty($id)){
+            $data = $a->getAdvertisement(addslashes($id));
+            $c = new Category();
+            $data['categories'] = $c->getAll();
+        }else{
+            header("Location:".BASE_URL.'advertisement');
+            exit;
+        }
+
+        $this->loadTemplate('editAdvertisement', $data);
+    }
+
+    public function deletePhoto($idPhoto){
+        $a = new Advertisement();
+        $id = $a->deletePhoto($idPhoto);
+
+        $this->edit($id);
     }
 }
