@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends Controller{
+class userController extends Controller{
 
     public function index(){
         $data = array();
