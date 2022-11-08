@@ -1,4 +1,10 @@
 <?php
+ namespace Controllers;
+
+ use Core\Controller;
+ use Models\Advertisement;
+ use Models\User;
+ use Models\Category;
 
 class advertisementController extends Controller {
 

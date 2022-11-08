@@ -1,5 +1,5 @@
 <?php
-
+namespace Core;
 class Core {
 
     public function run() {
@@ -13,7 +13,7 @@ class Core {
             $url = explode('/', $url);
             array_shift($url);
 
-            $currentController = $url[0].'Controller';
+            $currentController = "\Controllers\\".$url[0].'Controller';
             array_shift($url);
 
             if(isset($url[0]) && !empty($url[0])){
@@ -26,16 +26,17 @@ class Core {
                 $params = $url;
 
         }else{
-            $currentController = 'homeController';
+            $currentController = "\Controllers\\".'homeController';
             $currentAction = 'index';
         }
 
         if(!file_exists('controllers/'.$currentController.'.php') || !method_exists($currentController, $currentAction)){
-            $currentController = 'NotFoundController';
+            $currentController = "\Controllers\\".'NotFoundController';
             $currentAction = 'index';
         }
 
         $c = new $currentController();
+        //$c = new NotFoundController();
         call_user_func_array(array($c,$currentAction), $params);
     }
 }

@@ -1,5 +1,8 @@
 <?php
+namespace Models;
 
+use Core\Model;
+use PDO;
 class Advertisement extends Model{
 
     public function getAll($filters = null){

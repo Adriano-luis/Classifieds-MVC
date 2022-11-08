@@ -12,5 +12,5 @@
     //         require "core/".$class.".php";
     // });
 
-    $core = new Core();
+    $core = new \Core\Core();
     $core->run();

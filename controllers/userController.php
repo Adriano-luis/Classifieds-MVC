@@ -1,5 +1,12 @@
 <?php
 
+namespace Controllers;
+
+use Core\Controller;
+use Models\Advertisement;
+use Models\User;
+use Models\Category;
+
 class userController extends Controller{
 
     public function index(){

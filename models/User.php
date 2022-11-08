@@ -1,5 +1,8 @@
 <?php
+namespace Models;
 
+use Core\Model;
+use PDO;
 class User extends Model{
 
     /**

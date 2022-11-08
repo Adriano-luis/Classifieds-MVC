@@ -1,4 +1,11 @@
 <?php
+ 
+ namespace Controllers;
+
+ use Core\Controller;
+ use Models\Advertisement;
+ use Models\User;
+ use Models\Category;
 
 class homeController extends Controller {
     

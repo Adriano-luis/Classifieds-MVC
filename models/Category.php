@@ -1,5 +1,8 @@
 <?php
+namespace Models;
 
+use Core\Model;
+use PDO;
 class Category extends Model {
     public function getAll(){
         $list = array();
