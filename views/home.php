@@ -12,7 +12,7 @@
                     <select class="form-control" name="filter[category]" id="category">
                         <option value=""></option>
                         <?php 
-                            $c = new Category();
+                            $c = new Models\Category();
                             $categories = $c->getAll();
                             foreach ($categories as $category): ?>
                                 <option value="<?= $category['id'] ?>" <?= isset($filters['category']) && $filters['category'] == $category['id'] ? "selected='selected'": '' ?>>
